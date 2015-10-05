@@ -1,7 +1,14 @@
 # qwebs-auth-jwt
 Authentication service using JSON Web Token for Qwebs server
+  
+## Features
 
-## Add the jwt secret key the qwebs config file (config.json)
+  * Qwebs
+  * Authentication
+  * JSON Web Token
+  * Promises
+  
+## Add the jwt secret key the Qwebs config file (config.json)
 
 ```json
 {
@@ -13,7 +20,7 @@ Authentication service using JSON Web Token for Qwebs server
 
 ## Declare and inject the service $auth in Qwebs
 
-```json
+```js
 var Qwebs = require("qwebs");
 var qwebs = new Qwebs();
 
@@ -22,7 +29,7 @@ qwebs.inject("$auth", "qwebs-auth-jwt");
 
 ## Use $auth to connect user
 
-```json
+```js
 function MyService($auth) {
   this.$auth = $auth;
 };
@@ -43,7 +50,7 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
 
 ## Use $auth to authenticate user
 
-```json
+```js
 function MyService($auth) {
   this.$auth = $auth;
 };
@@ -61,12 +68,11 @@ MyService.prototype.isConnected = function (request, response, promise) {
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
 
-## Features
+## API
 
-  * Qwebs
-  * Authentication
-  * JSON Web Token
-  * Promises
+  * encode(payload)
+  * identify(request, response)
+  * decode(token)
 
 ## Installation
 
