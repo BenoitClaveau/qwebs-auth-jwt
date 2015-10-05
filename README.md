@@ -17,10 +17,10 @@ Authentication service using JSON Web Token for Qwebs server
 var Qwebs = require("qwebs");
 var qwebs = new Qwebs();
 
-this.qwebs.inject("$auth", "qwebs-auth-jwt");
+qwebs.inject("$auth", "qwebs-auth-jwt");
 ```
 
-## Use $auth in your connection service
+## Use $auth to connect user
 
 ```json
 function MyService($auth) {
@@ -41,7 +41,7 @@ MyService.prototype.connect = function (request, response, promise) {
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
 
-## Use $auth in your own service
+## Use $auth to authenticate user
 
 ```json
 function MyService($auth) {
@@ -66,7 +66,7 @@ exports = module.exports = MyService; //Return a class. Qwebs will instanciate i
   * Qwebs
   * Authentication
   * JSON Web Token
-  * Promise
+  * Promises
 
 ## Installation
 
