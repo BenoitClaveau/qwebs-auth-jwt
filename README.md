@@ -1,14 +1,14 @@
 # qwebs-auth-jwt
-Authentication service using JSON Web Token for Qwebs server
+> Authentication service using [JSON Web Token] (https://www.npmjs.com/package/jwt-simple) for [Qwebs server] (https://www.npmjs.com/package/qwebs).
   
 ## Features
 
-  * Qwebs
+  * [Qwebs] (https://www.npmjs.com/package/qwebs)
   * Authentication
-  * JSON Web Token
-  * Promises
+  * [JSON Web Token] (https://www.npmjs.com/package/jwt-simple)
+  * [Promise] (https://www.npmjs.com/package/q)
   
-## Add the jwt secret key the Qwebs config file (config.json)
+### Add the jwt secret key the Qwebs config file (config.json)
 
 ```json
 {
@@ -18,7 +18,7 @@ Authentication service using JSON Web Token for Qwebs server
 }
 ```
 
-## Declare and inject the service $auth in Qwebs
+### Declare and inject the service $auth in Qwebs
 
 ```js
 var Qwebs = require("qwebs");
@@ -27,7 +27,7 @@ var qwebs = new Qwebs();
 qwebs.inject("$auth", "qwebs-auth-jwt");
 ```
 
-## Use $auth to connect user
+### Use $auth to connect user
 
 ```js
 function MyService($auth) {
@@ -48,7 +48,7 @@ MyService.prototype.connect = function (request, response, promise) {
 exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
 ```
 
-## Use $auth to authenticate user
+### Use $auth to authenticate user
 
 ```js
 function MyService($auth) {
