@@ -4,11 +4,10 @@
 ## Features
 
   * [Qwebs](https://www.npmjs.com/package/qwebs)
-  * Authentication
-  * [JSON Web Token](https://www.npmjs.com/package/jwt-simple)
+  * [Authentication](https://www.npmjs.com/package/jwt-simple)
   * [Promise](https://www.npmjs.com/package/q)
   
-### Add the jwt secret key the Qwebs config file (config.json)
+### Add the jwt secret key in config.json
 
 ```json
 {
@@ -18,7 +17,7 @@
 }
 ```
 
-### Declare and inject the service $auth in Qwebs
+### Declare and inject $auth
 
 ```js
 var Qwebs = require("qwebs");
@@ -45,7 +44,7 @@ MyService.prototype.connect = function (request, response, promise) {
   });
 };
 
-exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
+exports = module.exports = MyService; //Return a class. Qwebs will create it;
 ```
 
 ### Use $auth to authenticate user
@@ -65,7 +64,7 @@ MyService.prototype.isConnected = function (request, response, promise) {
   });
 };
 
-exports = module.exports = MyService; //Return a class. Qwebs will instanciate it;
+exports = module.exports = MyService; //Return a class. Qwebs will vreate it;
 ```
 
 ## API
