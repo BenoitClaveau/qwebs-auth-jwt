@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "q": "^1.4.1",
-    "qwebs": "^0.0.22",
+    "qwebs": "^0.0.24",
     "jwt-simple": "^0.2.0"
   },
   "devDependencies": {},
