@@ -1,5 +1,5 @@
 # qwebs-auth-jwt
-> Authentication service using [JSON Web Token](https://www.npmjs.com/package/jwt-simple) for [Qwebs server](https://www.npmjs.com/package/qwebs).
+Authentication service using [JSON Web Token](https://www.npmjs.com/package/jwt-simple) for [Qwebs server](https://www.npmjs.com/package/qwebs).
   
 ## Features
 
@@ -11,9 +11,9 @@
 
 ```json
 {
-	"jwt": {
-        "secret": "secretCode"
-    },
+  "jwt": {
+    "secret": "secretCode"
+  },
 }
 ```
 
