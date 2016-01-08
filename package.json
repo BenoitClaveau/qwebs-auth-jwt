@@ -1,40 +1,40 @@
 {
-  "name": "qwebs-auth-jwt",
-  "version": "0.0.31",
-  "description": "Authentication service using JSON Web Token for Qwebs server",
-  "main": "index.js",
-  "dependencies": {
-    "q": "^1.4.1",
-    "qwebs": "^0.0.31",
-    "jwt-simple": "^0.4.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/beny78/qwebs-auth-jwt.git"
-  },
-  "keywords": [
-    "qwebs",
-    "authentication",
-    "jwt",    
-    "json",
-    "web",
-    "token",
-    "promise",
-    "q",
-    "webserver",
-    "web"
-  ],
-  "author": {
-    "name": "Benoît Claveau",
-    "email": "beny78@gmail.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/beny78/qwebs-auth-jwt/issues"
-  },
-  "homepage": "https://github.com/beny78/qwebs-auth-jwt"
+    "name": "qwebs-auth-jwt",
+    "version": "0.0.32",
+    "description": "Authentication service using JSON Web Token for Qwebs server",
+    "main": "index.js",
+    "dependencies": {
+        "q": "^1.4.1",
+        "qwebs": "^0.0.32",
+        "jwt-simple": "^0.4.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/beny78/qwebs-auth-jwt.git"
+    },
+    "keywords": [
+        "qwebs",
+        "authentication",
+        "jwt",
+        "json",
+        "web",
+        "token",
+        "promise",
+        "q",
+        "webserver",
+        "web"
+    ],
+    "author": {
+        "name": "Benoît Claveau",
+        "email": "beny78@gmail.com"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/beny78/qwebs-auth-jwt/issues"
+    },
+    "homepage": "https://github.com/beny78/qwebs-auth-jwt"
 }
