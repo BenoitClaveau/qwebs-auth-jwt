@@ -33,14 +33,12 @@ function MyService($auth) {
   this.$auth = $auth;
 };
 
-MyService.prototype.connect = function (request, response, promise) {
-  return promise.then(function (self) {
-    var payload = { 
-      login: request.body.login 
-    };
-    return self.$auth.encode(payload).then(function(token) {
-      return response.send({ request: request, content: { token: token } });
-    });
+MyService.prototype.connect = function (request, response) {
+  var payload = { 
+    login: request.body.login 
+  };
+  return this.$auth.encode(payload).then(token => {
+    return response.send({ request: request, content: { token: token } });
   });
 };
 
