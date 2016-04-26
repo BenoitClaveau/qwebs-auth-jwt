@@ -1,11 +1,11 @@
 {
     "name": "qwebs-auth-jwt",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "Authentication service using JSON Web Token for Qwebs server",
     "main": "index.js",
     "dependencies": {
         "q": "latest",
-        "qwebs": "^0.1.7",
+        "qwebs": "^0.1.8",
         "jwt-simple": "latest"
     },
     "devDependencies": {},
