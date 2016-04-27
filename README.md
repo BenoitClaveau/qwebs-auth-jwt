@@ -20,8 +20,8 @@ Authentication service using [JSON Web Token](https://www.npmjs.com/package/jwt-
 ### Declare and inject $auth
 
 ```js
-var Qwebs = require("qwebs");
-var qwebs = new Qwebs();
+const Qwebs = require("qwebs");
+const qwebs = new Qwebs();
 
 qwebs.inject("$auth", "qwebs-auth-jwt");
 ```
@@ -35,7 +35,7 @@ class MyService {
   };
 
   connect(request, response) {
-    var payload = { 
+    let payload = { 
       login: request.body.login 
     };
     return this.$auth.encode(payload).then(token => {
@@ -57,7 +57,7 @@ class MyService {
 
   isConnected(request, response) {
     return self.$auth.identify(request, response).then(() => {
-        var login = request.payload.login;
+        let login = request.payload.login;
         if (login != "myLogin") throw new DataError({ statusCode: 401 });
         return response.send({ request: request, content: { status: "connected" } });
     });
