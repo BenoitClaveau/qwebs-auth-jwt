@@ -29,17 +29,19 @@ qwebs.inject("$auth", "qwebs-auth-jwt");
 ### Use $auth to connect user
 
 ```js
-function MyService($auth) {
-  this.$auth = $auth;
-};
-
-MyService.prototype.connect = function (request, response) {
-  var payload = { 
-    login: request.body.login 
+class MyService {
+  constructor($auth) {
+    this.$auth = $auth;
   };
-  return this.$auth.encode(payload).then(token => {
-    return response.send({ request: request, content: { token: token } });
-  });
+
+  connect(request, response) {
+    var payload = { 
+      login: request.body.login 
+    };
+    return this.$auth.encode(payload).then(token => {
+      return response.send({ request: request, content: { token: token } });
+    });
+  };
 };
 
 exports = module.exports = MyService; //Return a class. Qwebs will create it;
@@ -48,18 +50,18 @@ exports = module.exports = MyService; //Return a class. Qwebs will create it;
 ### Use $auth to authenticate user
 
 ```js
-function MyService($auth) {
-  this.$auth = $auth;
-};
+class MyService {
+  constructor($auth) {
+    this.$auth = $auth;
+  };
 
-MyService.prototype.isConnected = function (request, response, promise) {
-  return promise.then(function (self) { 
-    return self.$auth.identify(request, response).then(function() {
+  isConnected(request, response) {
+    return self.$auth.identify(request, response).then(() => {
         var login = request.payload.login;
         if (login != "myLogin") throw new DataError({ statusCode: 401 });
         return response.send({ request: request, content: { status: "connected" } });
     });
-  });
+  };
 };
 
 exports = module.exports = MyService; //Return a class. Qwebs will vreate it;
