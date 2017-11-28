@@ -4,14 +4,19 @@
   "description": "Authentication service using JSON Web Token for Qwebs server",
   "main": "index.js",
   "dependencies": {
-    "qwebs": "latest",
+    "qwebs": "1.0.0-beta.0",
+    "oups": "latest",
     "jwt-simple": "latest"
   },
   "devDependencies": {
-    "jasmine": "latest"
+    "coveralls": "latest",
+    "expect.js": "latest",
+    "istanbul": "latest",
+    "mocha": "latest"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/mocha/bin/mocha --recursive tests",
+    "test-cover": "node_modules/.bin/istanbul cover node_modules/mocha/bin/mocha --recursive tests"
   },
   "repository": {
     "type": "git",
@@ -25,7 +30,6 @@
     "web",
     "token",
     "promise",
-    "q",
     "webserver",
     "web"
   ],

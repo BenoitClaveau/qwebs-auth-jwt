@@ -5,7 +5,9 @@
  */
 "use strict";
 
-const QwebsAuthJwt = require('../lib/qwebs-auth-jwt');
+const QwebsAuthJwt = require("../lib/qwebs-auth-jwt");
+const expect = require("expect.js");
+
 const $config = {
     jwt: {
         secret: "01234"
@@ -13,37 +15,35 @@ const $config = {
 }
 describe("auth", () => {
 
-    it("encode", done => {
+    it("encode", () => {
         const auth = new QwebsAuthJwt($config);
         const payload = {
             name: "My Name",
             version: 3
         }
-        return auth.encode(payload).then(token => {
-            expect(token).toBe("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E");
-        }).catch(fail).then(done);
+        expect(auth.encode(payload)).to.be("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E");
     });
 
     it("decode", done => {
         const auth = new QwebsAuthJwt($config);
         const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E";
-        return auth.decode(token).then(payload => {
-            expect(payload.name).toBe("My Name");
-            expect(payload.version).toBe(3);
-        }).catch(fail).then(done);
+        const payload = auth.decode(token);
+        expect(payload.name).to.be("My Name");
+        expect(payload.version).to.be(3);
     });
 
     it("single route", done => {
         const auth = new QwebsAuthJwt($config);
         const request = {
-            headers: {
-                authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E"
+            ask: {
+                headers: {
+                    authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E"
+                }
             }
         }
         const response = {};
-        return auth.identify(request, response).then(() => {
-            expect(request.payload.name).toBe("My Name");
-            expect(request.payload.version).toBe(3);
-        }).catch(fail).then(done);
+        auth.identify(request, response);
+        expect(request.payload.name).to.be("My Name");
+        expect(request.payload.version).to.be(3);
     });
 });
