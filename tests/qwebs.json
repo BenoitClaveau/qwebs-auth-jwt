@@ -1,0 +1,9 @@
+{
+    "http": {
+        "port": 3000
+    },
+    "jwt": {
+        "secret": "01234"
+    },
+    "services": "./services.json"
+}

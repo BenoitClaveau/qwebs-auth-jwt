@@ -1,0 +1,11 @@
+{
+    "services": [
+        { "name": "$http", "location": "qwebs-http"},
+        { "name": "$auth", "location": "../index"},
+        { "name": "$info", "location": "./services/info"}
+    ],
+    "http-routes": [
+        { "post": "/connect", "service": "$info", "method": "connect"},
+        { "get": "/info", "service": "$info", "method": "getInfo"}
+    ]
+}

@@ -5,7 +5,6 @@ Authentication service using [JSON Web Token](https://www.npmjs.com/package/jwt-
 
   * [Qwebs](https://www.npmjs.com/package/qwebs)
   * [Authentication](https://www.npmjs.com/package/jwt-simple)
-  * [Promise](https://www.npmjs.com/package/q)
   
 ### Add the jwt secret key in config.json
 
@@ -22,7 +21,6 @@ Authentication service using [JSON Web Token](https://www.npmjs.com/package/jwt-
 ```js
 const Qwebs = require("qwebs");
 const qwebs = new Qwebs();
-
 qwebs.inject("$auth", "qwebs-auth-jwt");
 ```
 
@@ -31,20 +29,16 @@ qwebs.inject("$auth", "qwebs-auth-jwt");
 ```js
 class MyService {
   constructor($auth) {
-    this.$auth = $auth;
+    this.auth = $auth;
   };
 
-  connect(request, response) {
-    let payload = { 
-      login: request.body.login 
-    };
-    return this.$auth.encode(payload).then(token => {
-      return response.send({ request: request, content: { token: token } });
-    });
+  async connect(ask, reply) {
+    const token = await this.auth.encode({ id: 12345 });
+		reply.end({ token });
   };
 };
 
-exports = module.exports = MyService; //Return a class. Qwebs will create it;
+exports = module.exports = MyService;
 ```
 
 ### Use $auth to authenticate user
@@ -52,26 +46,24 @@ exports = module.exports = MyService; //Return a class. Qwebs will create it;
 ```js
 class MyService {
   constructor($auth) {
-    this.$auth = $auth;
+    this.auth = $auth;
   };
 
-  isConnected(request, response) {
-    return self.$auth.identify(request, response).then(() => {
-        let login = request.payload.login;
-        if (login != "myLogin") throw new DataError({ statusCode: 401 });
-        return response.send({ request: request, content: { status: "connected" } });
-    });
-  };
+  async isConnected(ask, reply) {
+    await this.auth.identify(ask, reply);
+    const message = "I'm authorized."
+    reply.end({ message });
+	};
 };
 
-exports = module.exports = MyService; //Return a class. Qwebs will vreate it;
+exports = module.exports = MyService;
 ```
 
 ## API
 
   * encode(payload)
-  * identify(request, response)
   * decode(token)
+  * identify(ask, reply)
 
 ## Installation
 

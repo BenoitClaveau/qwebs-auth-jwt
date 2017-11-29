@@ -6,9 +6,16 @@
 "use strict";
 
 const QwebsAuthJwt = require("../lib/qwebs-auth-jwt");
+const Qwebs = require("qwebs");
 const expect = require("expect.js");
+const process =  require("process");
 
-const $config = {
+process.on("unhandledRejection", (reason, p) => {
+    console.error("Unhandled Rejection at:", p, "reason:", reason);
+});
+
+
+const config = {
     jwt: {
         secret: "01234"
     }
@@ -16,7 +23,7 @@ const $config = {
 describe("auth", () => {
 
     it("encode", () => {
-        const auth = new QwebsAuthJwt($config);
+        const auth = new QwebsAuthJwt(config);
         const payload = {
             name: "My Name",
             version: 3
@@ -24,26 +31,26 @@ describe("auth", () => {
         expect(auth.encode(payload)).to.be("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E");
     });
 
-    it("decode", done => {
-        const auth = new QwebsAuthJwt($config);
+    it("decode", () => {
+        const auth = new QwebsAuthJwt(config);
         const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E";
         const payload = auth.decode(token);
         expect(payload.name).to.be("My Name");
         expect(payload.version).to.be(3);
     });
 
-    it("single route", done => {
-        const auth = new QwebsAuthJwt($config);
-        const request = {
-            ask: {
-                headers: {
-                    authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E"
-                }
-            }
+    it("identify", async () => {
+        let qwebs = new Qwebs({ dirname: __dirname });
+        await qwebs.load();
+        const client = await qwebs.resolve("$client");
+        try {
+            const res1 = await client.get({ url: "http://localhost:3000/info", json: true });
+            throw new Error("Mustn't be executed.")
         }
-        const response = {};
-        auth.identify(request, response);
-        expect(request.payload.name).to.be("My Name");
-        expect(request.payload.version).to.be(3);
+        catch(error) {
+            expect(error.statusCode).to.be(401)
+        }
+        const res2 = await client.post({ url: "http://localhost:3000/connect", json: { id: 1024 }});
+        const res3 = await client.get({ url: "http://localhost:3000/info", json: true });
     });
 });
