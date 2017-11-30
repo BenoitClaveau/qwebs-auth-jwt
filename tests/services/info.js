@@ -16,12 +16,10 @@ class InfoService {
         //read ask body;
         //const token = await this.auth.encode({ id: 1024});
         //reply.end({ token });
-        const self = this;
-        ask.pipe(through2.obj(async function(chunk, enc, callback) {
-            const token = await self.auth.encode(chunk);
-            this.push({ token });
-        })).pipe(reply);
-
+        ask.pipe(through2.obj(async (chunk, enc, callback) => {
+            const token = await this.auth.encode(chunk);
+            callback(null, {token});
+        })).pipe(reply)
     };
     
 	async getInfo(ask, reply) {
