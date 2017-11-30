@@ -9,11 +9,12 @@
     "jwt-simple": "latest"
   },
   "devDependencies": {
-    "qwebs-http": "^1.0.0-beta.0",
     "coveralls": "latest",
     "expect.js": "latest",
     "istanbul": "latest",
-    "mocha": "latest"
+    "mocha": "latest",
+    "qwebs-http": "^1.0.0-beta.0",
+    "through2": "^2.0.3"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --recursive tests",
