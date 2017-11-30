@@ -51,6 +51,7 @@ describe("auth", () => {
             expect(error.statusCode).to.be(401)
         }
         const res2 = await client.post({ url: "http://localhost:3000/connect", json: { id: 1024 }});
-        const res3 = await client.get({ url: "http://localhost:3000/info", json: true });
+
+        const res3 = await client.get({ url: "http://localhost:3000/info", auth: { "bearer": res2.body }, json: true });
     });
 });
