@@ -53,6 +53,7 @@ describe("auth", () => {
         const res2 = await client.post({ url: "http://localhost:3000/connect", json: { id: 1024 }});
         expect(res2.body.token).not.to.be(null);
         const res3 = await client.get({ url: "http://localhost:3000/info", auth: { "bearer": res2.body.token }, json: true });
+        console.log(res3.body)
         expect(res3.body).to.eql({ message: "I'm authorized."});
-    });
+    }).timeout(10000);
 });
