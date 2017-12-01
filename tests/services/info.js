@@ -16,17 +16,8 @@ class InfoService {
     };
     
 	async getInfo(ask, reply) {
-        // await this.auth.identify(ask, reply);
-        // const message = "I'm authorized."
-        // reply.end({ message });
-
-        // ask.on("headers", headers => {
-        //     const payload = this.auth.payloadSync(headers);
-        //     const message = "I'm authorized."
-        //     reply.end({ message });
-        // });
-
-        ask.pipe(this.auth.payload()).pipe(reply);
+        reply.outputType = "object"
+        ask.pipe(this.auth.decode()).pipe(reply);
 	};
 };
 
