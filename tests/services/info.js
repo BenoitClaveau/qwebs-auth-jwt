@@ -19,11 +19,14 @@ class InfoService {
         // await this.auth.identify(ask, reply);
         // const message = "I'm authorized."
         // reply.end({ message });
-        ask.on("headers", headers => {
-            const payload = this.auth.payload(headers);
-            const message = "I'm authorized."
-            reply.end({ message });
-        });
+
+        // ask.on("headers", headers => {
+        //     const payload = this.auth.payloadSync(headers);
+        //     const message = "I'm authorized."
+        //     reply.end({ message });
+        // });
+
+        ask.pipe(this.auth.payload()).pipe(reply);
 	};
 };
 
