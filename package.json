@@ -1,6 +1,6 @@
 {
   "name": "qwebs-auth-jwt",
-  "version": "0.2.21",
+  "version": "1.0.0-beta.0",
   "description": "Authentication service using JSON Web Token for Qwebs server",
   "main": "index.js",
   "dependencies": {
@@ -14,7 +14,7 @@
     "istanbul": "latest",
     "mocha": "latest",
     "qwebs-http": "^1.0.0-beta.0",
-    "through2": "^2.0.3"
+    "through2": "latest"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --recursive tests",
