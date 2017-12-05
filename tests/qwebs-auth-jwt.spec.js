@@ -28,13 +28,13 @@ describe("auth", () => {
             name: "My Name",
             version: 3
         }
-        expect(auth.encodeSync(payload)).to.be("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E");
+        expect(auth.encode(payload)).to.be("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E");
     });
 
     it("decode", () => {
         const auth = new QwebsAuthJwt(config);
         const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTXkgTmFtZSIsInZlcnNpb24iOjN9.m69S2NJymL3HA08_PWvsJ07WPtjtyPfXCon9A5ckd7E";
-        const payload = auth.decodeSync(token);
+        const payload = auth.decode(token);
         expect(payload.name).to.be("My Name");
         expect(payload.version).to.be(3);
     });
@@ -54,6 +54,6 @@ describe("auth", () => {
         expect(res2.body.token).not.to.be(null);
         const res3 = await client.get({ url: "http://localhost:3001/info", auth: { "bearer": res2.body.token }, json: true });
         console.log(res3.body)
-        expect(res3.body).to.eql({ message: "I'm authorized."});
+        expect(res3.body).to.eql({ id: 1024 });
     }).timeout(10000);
 });

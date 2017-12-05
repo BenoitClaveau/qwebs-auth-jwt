@@ -5,6 +5,8 @@
 */
 "use strict"
 
+const through2 = require("through2");
+
 class InfoService {
 	constructor($auth) {
         this.auth = $auth;
@@ -12,12 +14,15 @@ class InfoService {
     
     async connect(ask, reply) {
         reply.outputType = "object";
-        ask.pipe(this.auth.encode()).pipe(reply);
+        ask.pipe(through2.obj(async (chunk, enc, callback) => {
+            const token = this.auth.encode(chunk);
+            callback(null, {token});
+        })).pipe(reply);
     };
     
 	async getInfo(ask, reply) {
-        reply.outputType = "object"
-        ask.pipe(this.auth.decode()).pipe(reply);
+        this.auth.identify(ask);
+        reply.end(ask.payload);
 	};
 };
 
